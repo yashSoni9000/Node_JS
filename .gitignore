@@ -1,2 +1,2 @@
 # Ignoring Node Module
-Node_JS/**/node_modules/
+/**/node_modules/
