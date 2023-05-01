@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
 
@@ -30,17 +31,35 @@ app.use('/api/v1/users', userRouter);
 
 module.exports = app;
 
-app.get('/',(req,res)=>{{
-  // res.status(200).send('Hello from server side!!');
-  res.status(200).json({message:'Hello from server side!!',app:'Natours'});
-}})
- 
-app.post('/',(req,res)=>{
-  res.send('You can post to this endpoint...')
-})
+// app.get('/',(req,res)=>{{
+//   // res.status(200).send('Hello from server side!!');
+//   res.status(200).json({message:'Hello from server side!!',app:'Natours'});
+// }})
 
-const port=3000;
-app.listen(port,()=>{
-  console.log(`app running on port ${port}...`);
+// app.post('/',(req,res)=>{
+//   res.send('You can post to this endpoint...')
+// })
+
+const tours = JSON.parse(
+  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
+
+app.get('/api/v1/tours', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: {
+      // tours:tours
+      tours
+    }
+  });
 });
 
+app.post('/api/v1/tours',(req,res)=>{
+  console.log(req.body);
+  res.send('Done!!');
+})
+
+const port = 3000;
+app.listen(port, () => {
+  console.log(`app running on port ${port}...`);
+});
