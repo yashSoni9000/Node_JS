@@ -3,8 +3,9 @@ const http = require("http");
 const url = require("url");
 const slugify = require("slugify");
 const replaceTemplate = require("./modules/replaceTemplate");
-// const hello = "Hello World!";
-// console.log(hello);
+
+const hello = "Hello World!";
+console.log(hello);
 
 ////////////////////
 // FILES
